@@ -26,7 +26,9 @@ router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
 
   User.find().then((user)=>{
-    res.send(user);
+    res.status(200).json({
+      userfound: user
+    });
   }, (error) => {
       res.status(400).send(err);
   });

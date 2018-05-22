@@ -1,27 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+// import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+import { User } from './users.model';
 
 const USERS_PATH = 'http://localhost:3000/users';
 
-export interface User {
-  _id?: string; // Assigned automatically by datastore
-  name?: string;
-  email?: string;
-}
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  private user: User[] = [];
+
+  constructor(private http: Http) {
     // this.getUsers();
     console.log('service user started ...');
   }
 
-  public getUsers() {
+  getUsers() {
     return this.http.get(USERS_PATH)
-    .pipe(map( (result: Response) =>  result.json ) );
-
+    .map((response: Response) =>  {
+      const usersfound = response.json().userfound;
+      const usersArray: User[] = [];
+      for (const userone of usersfound) {
+        usersArray.push( new User(userone._id, userone.name, userone.email));
+      }
+      this.user = usersArray;
+      return usersArray;
+    })
+    .catch((error: Response) => Observable.throw(error.json()));
   }
 
 }
