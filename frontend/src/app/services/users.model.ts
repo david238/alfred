@@ -1,17 +1,17 @@
 export class User {
-    _id?: string;
-    name: string;
+    username: string;
     email: string;
+    password: string;
 
-    constructor(_id: string, _name: string, _email: string) {
-        this._id = _id;
-        this.name = _name;
+    constructor(_username: string, _email: string, _password: string) {
+        this.username = _username;
         this.email = _email;
+        this.password = _password;
     }
 }
 
 export interface User {
-    _id?: string; // Assigned automatically by datastore
-    name: string;
+    username: string;
     email: string;
+    password: string;
   }

@@ -1,0 +1,26 @@
+<form (ngSubmit)="onSubmit(signupform)" #signupform="ngForm">
+  <h1>Create an account</h1>
+  <div class="form-group">
+      <label for="emailaddress">Username</label>
+      <input class="form-control" name="username" type="text" placeholder="What's your username?" autofocus="autofocus" required="required" ngModel/>
+  </div>
+  <div class="form-group">
+      <label for="emailaddress">Password</label>
+      <input class="form-control" name="password" type="password" placeholder="Choose a password" required="required" ngModel/>
+  </div>
+  <div class="form-group">
+      <label for="emailaddress">Confirm Password</label>
+      <input class="form-control" name="confirmpassword" type="password" placeholder="Confirm password" required="required" ngModel/>
+  </div>
+  <div class="form-group">
+      <label for="emailaddress">Email Address</label>
+      <input class="form-control" name="email" type="email" placeholder="Email address" ngModel/>
+  </div>
+  <div class="form-group">
+      <input type="submit" value="Sign me up!" class="btn btn-primary"/>
+      Already have an account? <a routerLink="/login" id="login_id">login</a>
+  </div>
+</form>
+<div class="alert alert-success" role="alert">
+    {{ msgrec }}
+</div>
